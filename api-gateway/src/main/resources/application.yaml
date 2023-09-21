@@ -1,0 +1,55 @@
+server:
+  port: 8086
+
+eureka:
+  client: 
+    service-url:
+      defaultZone: http://localhost:8085/eureka
+
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: security-open-api
+        uri: "lb://security"
+        predicates:
+            - Path=/api/v1/users/register, /api/v1/users/login
+        filters:
+          - PreserveHostHeader
+          
+      - id: product-protected-api
+        uri: "lb://product"
+        predicates:
+            - Path=/api/v1/product/*
+            - Header=Authorization, Bearer (.*) 
+        filters:
+          - PreserveHostHeader
+          - GlobalAuthenticationHeaderFilter
+
+
+
+
+    
+
+
+###########################################################################################
+# Spring Cloud API Gateway Custom Routes
+###########################################################################################     
+             
+             
+# spring.cloud.gateway.routes[0].id=product
+# spring.cloud.gateway.routes[0].uri=lb://product
+# spring.cloud.gateway.routes[0].predicates[0]=Path=/api/v1/product/all
+# spring.cloud.gateway.routes[0].predicates[1]=Method=GET
+# spring.cloud.gateway.routes[0].filters[0]=RemoveRequestHeader=Cookie
+
+# spring.cloud.gateway.routes[1].id=product
+# spring.cloud.gateway.routes[1].uri=lb://product
+# spring.cloud.gateway.routes[1].predicates[0]=Path=/api/v1/product/all
+# spring.cloud.gateway.routes[1].predicates[1]=Method=GET
+# spring.cloud.gateway.routes[1].filters[0]=RemoveRequestHeader=Cookie
+
+
