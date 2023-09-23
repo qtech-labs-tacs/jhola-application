@@ -1,0 +1,17 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: k8s-microservice-3
+  labels:
+    app: k8s-microservice-3
+
+spec:
+  containers:
+    - name: k8s-microservice-3
+      image: qtechlabstacs/k8stesting:1.0
+  restartPolicy:
+    Always
+
+    # Always, OnFailure, Never

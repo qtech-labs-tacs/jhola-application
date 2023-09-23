@@ -1,0 +1,74 @@
+version: "2.1"
+
+services:
+        zuul-gateway:
+                image: "${DOCKER_HUB_USERNAME}/zuul-gateway:${IMAGE_VERSION}"
+                container_name: zuul-gateway
+                ports:
+                   - 8080:8080
+                env_file:
+                   - env-variable-file-for-container-services.env
+                restart: always
+                mem_limit: 512m
+
+
+        swagger-gateway:
+                image: "${DOCKER_HUB_USERNAME}/swagger-gateway:${IMAGE_VERSION}"
+                container_name: swagger-gateway
+                ports:
+                   - 8081:8081
+                env_file:
+                   - env-variable-file-for-container-services.env
+                restart: always
+                mem_limit: 512m
+
+
+        security:
+                image: "${DOCKER_HUB_USERNAME}/security:${IMAGE_VERSION}"
+                container_name: security
+                ports:
+                   - 8083:8083
+                env_file:
+                   - env-variable-file-for-container-services.env
+                restart: always
+                mem_limit: 512m
+
+        analytics:
+                image: "${DOCKER_HUB_USERNAME}/analytics:${IMAGE_VERSION}"
+                container_name: analytics
+                ports:
+                   - 8086:8086
+                env_file:
+                   - env-variable-file-for-container-services.env
+                restart: always
+                mem_limit: 512m
+
+        cisco:
+                image: "${DOCKER_HUB_USERNAME}/cisco:${IMAGE_VERSION}"
+                container_name: cisco
+                ports:
+                   - 8085:8085
+                env_file:
+                   - env-variable-file-for-container-services.env
+                restart: always
+                mem_limit: 512m
+
+
+
+#        spring-cloud-gateway:
+#                image: "${DOCKER_HUB_USERNAME}/spring-cloud-gateway:${IMAGE_VERSION}"
+#                container_name: spring-cloud-gateway
+#                ports:
+#                   - 8082:8082
+#                env_file:
+#                   - env-variable-file-for-container-services.env
+#                restart: always
+#                mem_limit: 512m
+
+
+
+
+
+
+
+

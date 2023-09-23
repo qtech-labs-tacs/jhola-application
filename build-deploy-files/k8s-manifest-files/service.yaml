@@ -1,0 +1,20 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: template
+
+spec:
+  selector:
+    app: k8s-microservice-3
+  ports:
+    - name: http
+      port: 9999
+      nodePort: 30090
+  type: NodePort
+
+  # type: ClusterIP means that this service is available only inside kubernetes cluster
+  # type: NodePort means that this service is available from outside the cluster
+  #       NodePort starts from 30000
+    

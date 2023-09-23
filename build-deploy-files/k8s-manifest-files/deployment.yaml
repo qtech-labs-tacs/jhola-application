@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: k8s-microservice-3
+
+spec:
+    selector:
+      matchLabels:
+        app: k8s-microservice-3
+    replicas: 2
+    template: 
+      metadata:
+        labels:
+         app: k8s-microservice-3
+      spec:
+        containers:
+          - name: k8s-microservice-3
+            image: qtechlabstacs/k8stesting:1.0
+           
