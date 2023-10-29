@@ -1,0 +1,70 @@
+{ 
+    "category" : "FASHION",
+    "name" : "shirt",
+    "description" : "Cotton shirt",
+    "price" : 2000,
+    "vendorId" : 1,
+    "productId" : 1
+
+
+}
+
+
+{ 
+    "category" : "FASHION",
+    "name" : "jeans",
+    "description" : "Denim shirt",
+    "price" : 2000,
+    "vendorId" : 1,
+    "productId" : 2
+
+
+}
+
+
+{ 
+    "category" : "ELECTRONICS",
+    "name" : "laptop",
+    "description" : "Dell Laptop",
+    "price" : 2000,
+    "vendorId" : 1,
+    "productId" : 3
+
+
+}
+
+{ 
+    "category" : "ELECTRONICS",
+    "name" : "mobile",
+    "description" : "Vivo",
+    "price" : 35000,
+    "vendorId" : 1,
+    "productId" : 4
+
+
+}
+{ 
+    "category" : "SKINCARE",
+    "name" : "Fairness Cream",
+    "description" : "Lakme",
+    "price" : 2000,
+    "vendorId" : 1,
+    "productId" : 5
+
+
+}
+
+{ 
+    "category" : "SKINCARE",
+    "name" : "Hair Serum",
+    "description" : "Streks",
+    "price" : 2000,
+    "vendorId" : 1,
+    "productId" : 6
+
+
+}
+
+
+
+

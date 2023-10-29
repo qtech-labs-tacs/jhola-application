@@ -1,0 +1,21 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: jhola-prodcut-microservice
+
+spec:
+  selector:
+    key1: jhola-prodcut-microservice
+  ports:
+    - name: http
+      port: 8080
+      nodePort: 30090
+  
+  type: NodePort
+
+  # type: ClusterIP means that this service is available only inside kubernetes cluster
+  # type: NodePort means that this service is available from outside the cluster
+  #       NodePort starts from 30000
+    

@@ -28,9 +28,7 @@ spring:
         filters:
           - PreserveHostHeader
           - GlobalAuthenticationHeaderFilter
-
-
-
+          
 
     
 

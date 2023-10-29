@@ -1,6 +1,5 @@
 package com.jhola.security.controller;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,7 @@ import com.jhola.security.configuration.SecurityConstants;
 import com.jhola.security.dto.JWTLoginSucessReponse;
 import com.jhola.security.dto.LoginRequest;
 import com.jhola.security.dto.UserDTO;
-import com.jhola.security.model.User;
+import com.jhola.security.model.UserEntity;
 import com.jhola.security.service.UserService;
 
 
@@ -40,7 +38,7 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result) {
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -54,10 +52,10 @@ public class UserController {
     
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO userDTO, BindingResult result) {
+    public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
         
-    	User newUser = userService.saveUser(userDTO);
+    	UserEntity newUser = userService.saveUser(userDTO);
         
-        return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
+        return new ResponseEntity<UserEntity>(newUser, HttpStatus.CREATED);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhola.security.dto.UserDTO;
 import com.jhola.security.exception.UsernameAlreadyExistsException;
-import com.jhola.security.model.User;
+import com.jhola.security.model.UserEntity;
 import com.jhola.security.repository.UserRepository;
 
 
@@ -24,7 +24,7 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User saveUser (UserDTO newUser){
+    public UserEntity saveUser (UserDTO newUser){
 
         try{
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
@@ -36,7 +36,7 @@ public class UserService {
             // We don't persist or show the confirmPassword
             newUser.setConfirmPassword("");
             
-            User user = modelMapper.map(newUser, User.class);
+            UserEntity user = modelMapper.map(newUser, UserEntity.class);
             
             return userRepository.save(user);
 

@@ -11,17 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.jhola.security.dto.UserDTO;
-import com.jhola.security.model.User;
 import com.jhola.security.service.CustomUserDetailsService;
-
-
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -44,14 +41,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
 				
-				Long userId = tokenProvider.getUserIdFromJWT(jwt);
+//				Long userId = tokenProvider.getUserIdFromJWT(jwt);
+//				
+//				UserEntity userDetails = customUserDetailsService.loadUserById(userId);
+				String username = tokenProvider.getUsernameFromJWT(jwt);
 				
-				User userDetails = customUserDetailsService.loadUserById(userId);
+				UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 				
 				UserDTO user = modelMapper.map(userDetails, UserDTO.class);
 
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						user, null, Collections.emptyList());
+						user, null, userDetails.getAuthorities());
 
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
 				

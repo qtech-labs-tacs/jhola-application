@@ -7,7 +7,7 @@ echo Docker hub username entered:  ${DOCKER_HUB_USERNAME}
 echo Image version entered:  ${IMAGE_VERSION}
 
 echo "setting environment variable"
-source ./env-variable-file-for-container-services.env
+#source ./env-variable-file-for-container-services.env
 
 
 
@@ -109,7 +109,7 @@ _main(){
 	clusterRoleBindingRules
 	compileAndPackageApplicationArtifactsThatIsJar
 	
-	#	dockerLogin
+	dockerLogin
 	
 	echo "building image artifacts"
 	buildImagesLocal
@@ -117,7 +117,7 @@ _main(){
 	
 	    
     #echo "starting application stack"
-	#startApplicationStack
+	startApplicationStack
 
 	 echo "kubernetes deployment"
 	 kubernetesDeployment

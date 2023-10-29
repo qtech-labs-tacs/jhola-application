@@ -3,13 +3,13 @@ package com.jhola.security.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.jhola.security.model.User;
+import com.jhola.security.model.UserEntity;
 
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
 
-    User findByUsername(String username);
-    User getById(Long id);
+    UserEntity findByUsername(String username);
+    UserEntity getById(Long id);
 }

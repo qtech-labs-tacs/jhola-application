@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "product",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.jhol.ProductApplication",
+            "projectName": "product",
+            "args": "",
+            "env": {
+                "MESSAGE": "Hello World"
+            }
+        }
+    ]
+}

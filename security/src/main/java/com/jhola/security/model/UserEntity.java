@@ -3,16 +3,19 @@ package com.jhola.security.model;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,21 +23,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class User implements UserDetails {
+public class UserEntity implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Email(message = "Username needs to be an email")
-	@NotBlank(message = "username is required")
 	@Column(unique = true)
 	private String username;
-
-	@NotBlank(message = "Please enter your full name")
+	
 	private String fullName;
 
-	@NotBlank(message = "Password field is required")
 	private String password;
 
 	@Transient
@@ -43,9 +42,22 @@ public class User implements UserDetails {
 	private Date create_At;
 	
 	private Date update_At;
+	
+	@ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@JoinTable(name="users_roles", joinColumns=@JoinColumn(name="users_id", referencedColumnName="id"), 
+			inverseJoinColumns=@JoinColumn(name="roles_id", referencedColumnName="id"))
+	private Collection<RoleEntity> roles;
 
-	public User() {
+	
+	public Collection<RoleEntity> getRoles() {
+		return roles;
 	}
+
+	public void setRoles(Collection<RoleEntity> roles) {
+		this.roles = roles;
+	}
+
+
 
 	public Long getId() {
 		return id;

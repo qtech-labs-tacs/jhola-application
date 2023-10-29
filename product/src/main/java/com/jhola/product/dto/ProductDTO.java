@@ -11,8 +11,15 @@ public class ProductDTO implements Serializable {
 	private String name;
 	private String description;
 	private Long price;
-
+	private Long vendorId;
 	
+	public Long getVendorId() {
+		return vendorId;
+	}
+
+	public void setVendorId(Long vendorId) {
+		this.vendorId = vendorId;
+	}
 
 	public Long getProductId() {
 		return productId;

@@ -60,30 +60,29 @@ public class GlobalAuthenticationHeaderFilter
         return response.setComplete();
     }
 
-    private boolean isJwtValid(String jwt) {
-        /*
-         * boolean returnValue = false;
-         * 
-         * Object requestObject = null;
-         * 
-         * org.springframework.http.HttpHeaders reqHeaders = new
-         * org.springframework.http.HttpHeaders();
-         * 
-         * Map<String, String> reqHeaderMap = new HashMap<String, String>();
-         * reqHeaderMap.put("Authorization", jwt);
-         * reqHeaderMap.put("Content-Type", "application/json");
-         * reqHeaders.setAll(reqHeaderMap);
-         * 
-         * HttpEntity<?> reqEntity = new HttpEntity(requestObject, reqHeaders);
-         * 
-         * ResponseEntity<Boolean> responseEntity =
-         * reqRestTemplate.exchange("http://security:8005/security/validatetoken",
-         * HttpMethod.GET, reqEntity, Boolean.class);
-         * 
-         * if (responseEntity != null) {
-         * returnValue = responseEntity.getBody();
-         * }
-         */
-        return true;
+	private boolean isJwtValid(String jwt) {
+		/*
+		 * boolean returnValue = false;
+		 * 
+		 * Object requestObject = null;
+		 * 
+		 * org.springframework.http.HttpHeaders reqHeaders = new
+		 * org.springframework.http.HttpHeaders();
+		 * 
+		 * Map<String, String> reqHeaderMap = new HashMap<String, String>();
+		 * reqHeaderMap.put("Authorization", jwt); reqHeaderMap.put("Content-Type",
+		 * "application/json"); reqHeaders.setAll(reqHeaderMap);
+		 * 
+		 * HttpEntity<?> reqEntity = new HttpEntity(requestObject, reqHeaders);
+		 * 
+		 * ResponseEntity<Boolean> responseEntity =
+		 * reqRestTemplate.exchange("http://security:8005/security/validatetoken",
+		 * HttpMethod.GET, reqEntity, Boolean.class);
+		 * 
+		 * if (responseEntity != null) { returnValue = responseEntity.getBody(); }
+		 */
+		return true;
     }
+	
+	
 }

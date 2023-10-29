@@ -5,17 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-
-import com.jhola.security.model.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 
 @Component
 public class JwtTokenProvider {
@@ -28,14 +27,13 @@ public class JwtTokenProvider {
 
 		Date expiryDate = new Date(now.getTime() + SecurityConstants.EXPIRATION_TIME);
 
-		String userId = Long.toString(user.getId());
 
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("id", (Long.toString(user.getId())));
 		claims.put("username", user.getUsername());
-		claims.put("fullName", user.getFullName());
+		claims.put("scope", user.getAuthorities());
+		
 
-		return Jwts.builder().setSubject(userId).setClaims(claims).setIssuedAt(now).setExpiration(expiryDate)
+		return Jwts.builder().setSubject(user.getUsername()).setClaims(claims).setIssuedAt(now).setExpiration(expiryDate)
 				.signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET).compact();
 	}
 	
@@ -68,5 +66,12 @@ public class JwtTokenProvider {
 		String id = (String) claims.get("id");
 
 		return Long.parseLong(id);
+	}
+
+	public String getUsernameFromJWT(String token) {
+		Claims claims = Jwts.parser().setSigningKey(SecurityConstants.SECRET).parseClaimsJws(token).getBody();
+		String id = (String) claims.get("username");
+		
+		return id;
 	}
 }
